@@ -33,6 +33,7 @@ app.post('/api/courses', (req, res) => {
     if(!req.body.course || req.body.course.length < 3){
         // 400 Bad Request
         res.status(400).send("Name of course should not be empty and should be minimum of 3 characters");
+        return;
     }
     
     const course = {
