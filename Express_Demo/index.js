@@ -21,7 +21,10 @@ app.get('/api/courses', (req,res) => {
 
 app.get('/api/courses/:id', (req,res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    if(!course) res.status(404).send('No course with given ID was found');
+    if(!course) {
+        res.status(404).send('No course with given ID was found');
+        return;
+    }
     else res.send(course);
 });
 
@@ -52,7 +55,10 @@ app.put('/api/courses/:id', (req, res) => {
     // Find course
     // if not existing, return 404 error
     var course = courses.find(c => c.id === parseInt(req.params.id));
-    if(!course) res.status(404).send('No course with given ID was found');
+    if(!course) {
+        res.status(404).send('No course with given ID was found');
+        return;
+    }
    
    
     // Validate new course
@@ -72,7 +78,10 @@ app.delete('/api/courses/:id', (req,res)=>{
     // Find course
     // if not existing, return 404 error
     var course = courses.find(c => c.id === parseInt(req.params.id));
-    if(!course) res.status(404).send('No course with given ID was found');
+    if(!course) {
+        res.status(404).send('No course with given ID was found');
+        return;
+    }
     
     // Get the index of the course we're looking for (to delete)
     const index = courses.indexOf(course);
