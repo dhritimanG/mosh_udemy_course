@@ -59,6 +59,7 @@ app.put('/api/courses/:id', (req, res) => {
         return;
     }
 
+    // Replace found course with new course
     course.course = req.body.course
     res.send(course)
 });
