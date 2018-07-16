@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 const courses = [
     {id: 1, course: 'course1'},
     {id: 2, course: 'course2'},
@@ -13,7 +15,7 @@ app.get('/', (req,res) => {
 
 
 app.get('/api/courses', (req,res) => {
-    res.send([1,2,3,4,5]);
+    res.send(courses);
 });
 
 
@@ -26,6 +28,20 @@ app.get('/api/courses/:id', (req,res) => {
 app.get('/api/posts/:year/:month', (req, res) => {
     res.send(req.params);
 });
+
+app.post('/api/courses', (req, res) => {
+    if(!req.body.course || req.body.course.length < 3){
+        // 400 Bad Request
+        res.status(400).send("Name of course should not be empty and should be minimum of 3 characters");
+    }
+    
+    const course = {
+        id: courses.length + 1,
+        course: req.body.course
+    };
+    courses.push(course);
+    res.send(course);
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> { console.log(`Listening on port number ${port}`)});
