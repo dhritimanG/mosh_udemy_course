@@ -25,10 +25,12 @@ app.get('/api/courses/:id', (req,res) => {
     else res.send(course);
 });
 
+// GET Request
 app.get('/api/posts/:year/:month', (req, res) => {
     res.send(req.params);
 });
 
+// POST Request
 app.post('/api/courses', (req, res) => {
     if(!req.body.course || req.body.course.length < 3){
         // 400 Bad Request
@@ -43,6 +45,23 @@ app.post('/api/courses', (req, res) => {
     courses.push(course);
     res.send(course);
 })
+
+
+// PUT Request
+app.put('/api/courses/:id', (req, res) => {
+    // Find course
+    var course = courses.find(c => c.id === parseInt(req.params.id));
+
+    // Validate new course
+    if(!req.body.course || req.body.course.length < 3){
+        // 400 Bad Request
+        res.status(400).send("Name of course should not be empty and should be minimum of 3 characters");
+        return;
+    }
+
+    course.course = req.body.course
+    res.send(course)
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> { console.log(`Listening on port number ${port}`)});
