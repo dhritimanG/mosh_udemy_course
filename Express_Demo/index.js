@@ -50,8 +50,11 @@ app.post('/api/courses', (req, res) => {
 // PUT Request
 app.put('/api/courses/:id', (req, res) => {
     // Find course
+    // if not existing, return 404 error
     var course = courses.find(c => c.id === parseInt(req.params.id));
-
+    if(!course) res.status(404).send('No course with given ID was found');
+   
+   
     // Validate new course
     if(!req.body.course || req.body.course.length < 3){
         // 400 Bad Request
