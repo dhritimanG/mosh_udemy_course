@@ -6,7 +6,7 @@ getUser(1, (user) => {
 
     // Find all valid GitHub repositories of this user
     getRepositories(user.gitHubUsername, (repos) => {
-        console.log(['repo1', 'repo2', 'repo3']);
+        console.log('Repos retrieves were: ', repos);
     });
 });
 
@@ -22,6 +22,6 @@ function getUser(user, callback){
 function getRepositories(user, callback){
     setTimeout(() => {
         console.log('Finding repositories belonging to the user');
-        callback({id: 1, gitHubUsername: 'alex'});
+        callback(['repo1', 'repo2', 'repo3']);
     }, 2000);
 }
