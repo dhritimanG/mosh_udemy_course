@@ -1,5 +1,14 @@
 console.log("Before GitHub API Call");
 
+
+/**
+ * Write promises strictly in the following syntax or it will perform execution
+ * in a weird order and give strange results. JavaScript is weird!!
+ * 
+ * i.e Don't write more than a single instruction in the the then block.
+ * For nested asynchronmous calls, use Promises strictly for chaining and
+ * nothing else
+ */
 getUser(1)
     .then(user => getRepositories(user.gitHubUsername))
     .then(repos => console.log('Repositories belonging to this user are: ', repos))
