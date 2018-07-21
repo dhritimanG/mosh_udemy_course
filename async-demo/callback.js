@@ -12,14 +12,14 @@ getUser(1, (user) => {
 
 console.log("After GitHub API Call");
 
-function getUser(user, callback){
+function getUser(userId, callback){
     setTimeout(()=>{
         console.log('Reading from the database...');
-        callback('alex green');
+        callback({id: 1, gitHubUsername: 'alex'});
     }, 2000);
 }
 
-function getRepositories(user, callback){
+function getRepositories(gitHubUsername, callback){
     setTimeout(() => {
         console.log('Finding repositories belonging to the user');
         callback(['repo1', 'repo2', 'repo3']);
